@@ -88,6 +88,22 @@ struct AutoScrollSection: View {
                     Slider(value: $state.autoScrollExponent, in: 1.0 ... 3.0, step: 0.1)
                 }
 
+                HStack {
+                    Text("Icon size")
+                    Spacer()
+                    Picker(String(""), selection: $state.autoScrollIconSize) {
+                        Text("Small")
+                            .tag(Scheme.Buttons.AutoScroll.IconSize.small)
+                        Text("Regular")
+                            .tag(Scheme.Buttons.AutoScroll.IconSize.regular)
+                        Text("Large")
+                            .tag(Scheme.Buttons.AutoScroll.IconSize.large)
+                    }
+                    .labelsHidden()
+                    .fixedSize()
+                    .modifier(PickerViewModifier())
+                }
+
                 Text(modeDescription)
                     .settingsDescriptionStyle()
                     .padding(.top, 4)
