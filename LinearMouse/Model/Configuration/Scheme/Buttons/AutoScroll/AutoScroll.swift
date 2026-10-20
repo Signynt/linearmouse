@@ -23,21 +23,10 @@ extension Scheme.Buttons {
             case hold
         }
 
-        enum IconSize: String, Codable, Equatable, CaseIterable, Identifiable {
-            var id: Self {
-                self
-            }
-
-            case small
-            case regular
-            case large
-        }
-
         var enabled: Bool?
         var toggleActivation: ToggleActivation?
         var modes: [Mode]?
         var speed: Decimal?
-        var iconSize: IconSize?
         var exponent: Decimal?
         var trigger: Mapping?
 
@@ -51,7 +40,6 @@ extension Scheme.Buttons.AutoScroll: Codable {
         case toggleActivation
         case mode
         case speed
-        case iconSize
         case exponent
         case trigger
     }
@@ -63,7 +51,6 @@ extension Scheme.Buttons.AutoScroll: Codable {
         toggleActivation = try container.decodeIfPresent(ToggleActivation.self, forKey: .toggleActivation)
         modes = try container.decodeIfPresent(SingleValueOrArray<Mode>.self, forKey: .mode)?.wrappedValue
         speed = try container.decodeIfPresent(Decimal.self, forKey: .speed)
-        iconSize = try container.decodeIfPresent(IconSize.self, forKey: .iconSize)
         exponent = try container.decodeIfPresent(Decimal.self, forKey: .exponent)
         trigger = try container.decodeIfPresent(Scheme.Buttons.Mapping.self, forKey: .trigger)
     }
@@ -75,7 +62,6 @@ extension Scheme.Buttons.AutoScroll: Codable {
         try container.encodeIfPresent(toggleActivation, forKey: .toggleActivation)
         try container.encode(SingleValueOrArray(wrappedValue: modes), forKey: .mode)
         try container.encodeIfPresent(speed, forKey: .speed)
-        try container.encodeIfPresent(iconSize, forKey: .iconSize)
         try container.encodeIfPresent(exponent, forKey: .exponent)
         try container.encodeIfPresent(trigger, forKey: .trigger)
     }
@@ -99,10 +85,6 @@ extension Scheme.Buttons.AutoScroll {
         normalizedModes.contains(.hold)
     }
 
-    var normalizedIconSize: IconSize {
-        iconSize ?? .regular
-    }
-
     func merge(into autoScroll: inout Self) {
         if let enabled {
             autoScroll.enabled = enabled
@@ -120,8 +102,6 @@ extension Scheme.Buttons.AutoScroll {
             autoScroll.speed = speed
         }
 
-        if let iconSize {
-            autoScroll.iconSize = iconSize
         if let exponent {
             autoScroll.exponent = exponent
         }

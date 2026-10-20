@@ -77,20 +77,6 @@ struct AutoScrollSection: View {
                     Slider(value: $state.autoScrollSpeed, in: 0.3 ... 3.0, step: 0.1)
                 }
 
-                HStack {
-                    Text("Icon size")
-                    Spacer()
-                    Picker(String(""), selection: $state.autoScrollIconSize) {
-                        Text("Small")
-                            .tag(Scheme.Buttons.AutoScroll.IconSize.small)
-                        Text("Regular")
-                            .tag(Scheme.Buttons.AutoScroll.IconSize.regular)
-                        Text("Large")
-                            .tag(Scheme.Buttons.AutoScroll.IconSize.large)
-                    }
-                    .labelsHidden()
-                    .fixedSize()
-                    .modifier(PickerViewModifier())
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("Scroll Acceleration Exponent")

@@ -22,7 +22,6 @@ final class AutoScrollTransformer {
     private let modes: [Scheme.Buttons.AutoScroll.Mode]
     private let toggleActivation: Scheme.Buttons.AutoScroll.ToggleActivation
     private let speed: Double
-    private let iconSize: Scheme.Buttons.AutoScroll.IconSize
     private let exponent: Double
     private let now: () -> TimeInterval
     private let scheduleLongPressTimer: LongPressTimerScheduler
@@ -98,7 +97,6 @@ final class AutoScrollTransformer {
     private var longPressTimerCancellation: (() -> Void)?
     private var longPressTimerGeneration: UInt64 = 0
     private var timer: EventThreadTimer?
-    private lazy var indicatorController = AutoScrollIndicatorWindowController(iconSize: iconSize)
     private var lastTickTime: TimeInterval?
     private var pendingHorizontalScroll: Double = 0
     private var pendingVerticalScroll: Double = 0
@@ -115,7 +113,6 @@ final class AutoScrollTransformer {
         modes: [Scheme.Buttons.AutoScroll.Mode],
         toggleActivation: Scheme.Buttons.AutoScroll.ToggleActivation = .shortPress,
         speed: Double,
-        iconSize: Scheme.Buttons.AutoScroll.IconSize = .regular,
         exponent: Double = 2.2,
         longPressTimerScheduler: @escaping LongPressTimerScheduler = AutoScrollTransformer
             .scheduleEventThreadLongPressTimer,
@@ -127,7 +124,6 @@ final class AutoScrollTransformer {
         self.modes = modes
         self.toggleActivation = toggleActivation
         self.speed = speed
-        self.iconSize = iconSize
         self.exponent = exponent
         self.now = now
         scheduleLongPressTimer = longPressTimerScheduler
@@ -881,14 +877,12 @@ extension AutoScrollTransformer {
         modes: [Scheme.Buttons.AutoScroll.Mode],
         toggleActivation: Scheme.Buttons.AutoScroll.ToggleActivation,
         speed: Double,
-        iconSize: Scheme.Buttons.AutoScroll.IconSize
         exponent: Double
     ) -> Bool {
         self.trigger == trigger &&
             self.modes == modes &&
             self.toggleActivation == toggleActivation &&
             abs(self.speed - speed) < 0.0001 &&
-            self.iconSize == iconSize
             abs(self.exponent - exponent) < 0.0001
     }
 }

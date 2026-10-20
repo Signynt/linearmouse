@@ -1097,7 +1097,6 @@ class EventTransformerManager {
         let modes = autoScroll.normalizedModes
         let toggleActivation = autoScroll.normalizedToggleActivation
         let speed = autoScroll.speed?.asTruncatedDouble ?? 1
-        let iconSize = autoScroll.normalizedIconSize
         let exponent = autoScroll.exponent?.asTruncatedDouble ?? 2.2
 
         if let sharedAutoScrollTransformer,
@@ -1106,7 +1105,6 @@ class EventTransformerManager {
                modes: modes,
                toggleActivation: toggleActivation,
                speed: speed,
-               iconSize: iconSize
                exponent: exponent
            ) {
             return sharedAutoScrollTransformer
@@ -1119,8 +1117,6 @@ class EventTransformerManager {
             modes: modes,
             toggleActivation: toggleActivation,
             speed: speed,
-            iconSize: iconSize
-        ) { [postEvent] in postEvent($0, .cgSessionEventTap) }
             exponent: exponent
         )            { [postEvent] in postEvent($0, .cgSessionEventTap) }
         transformer.onPointerMotionRequirementChanged = { [weak self] in

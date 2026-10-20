@@ -250,15 +250,6 @@ extension ButtonsSettingsState {
         String(format: "%.1fx", autoScrollSpeed)
     }
 
-    var autoScrollIconSize: Scheme.Buttons.AutoScroll.IconSize {
-        get {
-            mergedScheme.buttons.autoScroll.normalizedIconSize
-        }
-        set {
-            scheme.buttons.autoScroll.iconSize = newValue
-        }
-    }
-
     var autoScrollExponent: Double {
         get {
             mergedScheme.buttons.autoScroll.exponent?.asTruncatedDouble ?? 2.2
