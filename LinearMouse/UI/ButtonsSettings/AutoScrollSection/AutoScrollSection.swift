@@ -91,6 +91,15 @@ struct AutoScrollSection: View {
                     .labelsHidden()
                     .fixedSize()
                     .modifier(PickerViewModifier())
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Scroll Acceleration Exponent")
+                        Spacer()
+                        Text(state.autoScrollExponentText)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Slider(value: $state.autoScrollExponent, in: 1.0 ... 3.0, step: 0.1)
                 }
 
                 Text(modeDescription)

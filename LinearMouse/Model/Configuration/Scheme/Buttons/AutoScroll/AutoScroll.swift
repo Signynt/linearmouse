@@ -38,6 +38,7 @@ extension Scheme.Buttons {
         var modes: [Mode]?
         var speed: Decimal?
         var iconSize: IconSize?
+        var exponent: Decimal?
         var trigger: Mapping?
 
         init() {}
@@ -51,6 +52,7 @@ extension Scheme.Buttons.AutoScroll: Codable {
         case mode
         case speed
         case iconSize
+        case exponent
         case trigger
     }
 
@@ -62,6 +64,7 @@ extension Scheme.Buttons.AutoScroll: Codable {
         modes = try container.decodeIfPresent(SingleValueOrArray<Mode>.self, forKey: .mode)?.wrappedValue
         speed = try container.decodeIfPresent(Decimal.self, forKey: .speed)
         iconSize = try container.decodeIfPresent(IconSize.self, forKey: .iconSize)
+        exponent = try container.decodeIfPresent(Decimal.self, forKey: .exponent)
         trigger = try container.decodeIfPresent(Scheme.Buttons.Mapping.self, forKey: .trigger)
     }
 
@@ -73,6 +76,7 @@ extension Scheme.Buttons.AutoScroll: Codable {
         try container.encode(SingleValueOrArray(wrappedValue: modes), forKey: .mode)
         try container.encodeIfPresent(speed, forKey: .speed)
         try container.encodeIfPresent(iconSize, forKey: .iconSize)
+        try container.encodeIfPresent(exponent, forKey: .exponent)
         try container.encodeIfPresent(trigger, forKey: .trigger)
     }
 }
@@ -118,6 +122,8 @@ extension Scheme.Buttons.AutoScroll {
 
         if let iconSize {
             autoScroll.iconSize = iconSize
+        if let exponent {
+            autoScroll.exponent = exponent
         }
 
         if let trigger {
